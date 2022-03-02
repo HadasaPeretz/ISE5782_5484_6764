@@ -5,7 +5,7 @@ import static primitives.Util.*;
 /**
  * Test program for the 1st stage
  *
- * @author Dan Zilberstein
+ * @author Hadasa and Galit
  */
 public final class Main {
 
@@ -52,7 +52,7 @@ public final class Main {
 
 		// test vector normalization vs vector length and cross-product
 		Vector v = new Vector(1, 2, 3);
-		Vector u = v.normalize();
+		Vector u = v.normelaize();
 		if (!isZero(u.length() - 1))
 			out.println("ERROR: the normalized vector is not a unit vector");
 		try { // test that the vectors are co-lined
