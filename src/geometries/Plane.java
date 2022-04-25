@@ -1,5 +1,7 @@
 package geometries;
 
+import static org.junit.Assert.fail;
+
 import primitives.Point;
 import primitives.Vector;
 
@@ -14,16 +16,17 @@ public class Plane implements Geometry
 	public Vector getVector() {
 		return vector;
 	}
+	
 	public Vector getNormal() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return vector;
+	}
+	@Override
+    public Vector getNormal(Point p) {
+		
+		return vector;
 	}
 
-	@Override
-	public Vector getNormal(Point p) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public String toString() {

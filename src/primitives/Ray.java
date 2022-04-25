@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Ray  
 {
-	final Point p0;
-	final Vector dir;
+	 Point p0;
+	 Vector dir;
 	
 	
 	public Point getP0() 

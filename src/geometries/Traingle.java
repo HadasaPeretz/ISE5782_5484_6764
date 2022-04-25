@@ -20,7 +20,6 @@ public class Traingle extends Polygon implements Geometry
 
 	@Override
 	public Vector getNormal(Point point) {
-		// TODO Auto-generated method stub
 		return super.getNormal(point);
 	}
 

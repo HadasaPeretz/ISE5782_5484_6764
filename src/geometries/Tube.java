@@ -24,8 +24,10 @@ public Tube(double radius, Ray ray) {
 
 @Override
 public Vector getNormal(Point p) {
-	// TODO Auto-generated method stub
-	return null;
+	double t=ray.getDir().dotProduct(p.subtract(ray.getP0()));
+	Point pointO =ray.getP0().add(ray.getDir().scale(t));
+	Vector myVec=p.subtract(pointO);
+	return myVec.normelaize();
 }
 
 @Override

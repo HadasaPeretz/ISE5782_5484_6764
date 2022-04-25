@@ -35,7 +35,7 @@ public String toString() {
 
 @Override
 public Vector getNormal(Point p) {
-	// TODO Auto-generated method stub
-	return null;
+	Vector v=p.subtract(point);	
+	return v.normelaize();
 }
 }

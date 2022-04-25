@@ -32,7 +32,7 @@ public String toString() {
 
 @Override
 public Vector getNormal(Point p) {
-	// TODO Auto-generated method stub
+	
 	return null;
 }
 }

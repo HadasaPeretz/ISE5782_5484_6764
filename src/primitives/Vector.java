@@ -42,13 +42,13 @@ public class Vector extends Point
 	{	
         return new Vector(super.add(v).xyz);
 	}
-	public  Vector scale  (Double x) 
+	public  Vector scale  (Double x) // מכפלה סקלרית
 	{
 		
 		return new Vector(this.xyz.scale(x) );
 	}
 	
-	public  Vector crossProduct  (Vector x) 
+	public  Vector crossProduct  (Vector x)// מכפלה וקטורית
 	{
 		double xx=this.xyz.d2*x.xyz.d3-this.xyz.d3*x.xyz.d2;
 		double yy=this.xyz.d3*x.xyz.d1-this.xyz.d1*x.xyz.d3;// למה לא עובד עם מינוס
