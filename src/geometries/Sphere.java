@@ -34,8 +34,9 @@ public String toString() {
 
 
 @Override
-public Vector getNormal(Point p) {
-	Vector v=p.subtract(point);	
+public Vector getNormal(Point p) 
+{
+	Vector v=p.subtract(this.point);	
 	return v.normelaize();
 }
 }

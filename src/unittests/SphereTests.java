@@ -3,6 +3,7 @@
  */
 package unittests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -21,8 +22,9 @@ class SphereTests {
 	 * Test method for {@link geometries.Sphere#getNormal(primitives.Point)}.
 	 */
 	@Test
-	void testGetNormal() {	// ============ Equivalence Partitions Tests ==============
-		Point p= new Point(1, 1, 6);
+	void testGetNormal()
+	{	// ============ Equivalence Partitions Tests ==============
+		Point p= new Point(2, 1, 5);
 		Point p1=new Point(1,1,1);
 		Sphere s = new Sphere(p1,5);
 		Vector v= p1.subtract(p).normelaize();

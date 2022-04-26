@@ -33,7 +33,8 @@ public abstract class Util {
 	 * @param number the number to check
 	 * @return true if the number is zero or almost zero, false otherwise
 	 */
-	public static boolean isZero(double number) {
+	public static boolean isZero(double number) 
+	{
 		return getExp(number) < ACCURACY;
 	}
 

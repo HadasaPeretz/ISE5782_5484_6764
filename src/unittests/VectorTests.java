@@ -2,6 +2,7 @@
  * 
  */
 package unittests;
+import static primitives.Util.isZero;
 import static org.junit.Assert.*;
 
 import static org.junit.Assert.assertEquals;
@@ -83,32 +84,108 @@ class VectorTests {
 	 * Test method for {@link primitives.Vector#lengthSquared()}.
 	 */
 	@Test
-	void testLengthSquared() {
-		fail("Not yet implemented");
+	void testLengthSquared() 
+	{
+		Vector v1;
+		try 
+		{
+			// ============ Equivalence Partitions Tests ==============
+			v1 = new Vector(1, 2, 3);
+			assertTrue("lengthSquared() return wrong value", isZero(v1.lengthSquared() - 14));
+		} 
+		catch (Exception e) 
+		{
+			fail("LengthSquared() for vectors that not zero vector does not need throw an exception");
+		}
+		
 	}
 
 	/**
 	 * Test method for {@link primitives.Vector#length()}.
 	 */
 	@Test
-	void testLength() {
-		fail("Not yet implemented");
+	void testLength() 
+	{
+		try
+		{
+			// ============ Equivalence Partitions Tests ==============
+			assertTrue("Length() return wrong value", isZero(new Vector(0, 3, 4).length() - 5));
+		}
+		catch (Exception e) 
+		{
+			fail("Length() for vectors that not zero vector does not need throw an exception");
+		}
 	}
 
 	/**
 	 * Test method for {@link primitives.Vector#normelaize()}.
 	 */
 	@Test
-	void testNormelaize() {
-		fail("Not yet implemented");
+	void testNormelaize() 
+	{
+		Vector v;
+		Vector vCopy;
+		Vector vCopyNormalize;
+		// ============ Equivalence Partitions Tests ==============
+		try 
+		{
+			v = new Vector(1, 2, 3);
+			vCopy = new Vector(v.getXyz());//vcopy==v
+			vCopyNormalize = vCopy.normelaize();
+			assertFalse("ERROR: normalize() function creates a new vector", vCopy != vCopyNormalize);
+			assertTrue("ERROR: normalize() result is not a unit vector", isZero(vCopyNormalize.length() - 1));    
+		} 
+		catch (Exception e) 
+		{
+			fail("Normalize() for vectors that not zero vector does not need throw an exception");
+		}
+
+		try 
+		{
+			v = new Vector(3.5,-5,10);
+			v.normelaize();
+			assertEquals("ERROR: normalize() result is not a unit vector", 1, v.length(),1e-10);
+		}
+		catch (Exception e) {}
+		 // =============== Boundary Values Tests ==================
+		try
+		{
+			v = new Vector(0,0,0);
+			v.normelaize();
+			fail("Didn't throw divide by zero exception!");
+		} 
+		catch (ArithmeticException e) 
+		{
+			assertTrue(true);
+		} 
+		catch (Exception e) {}
+		
 	}
 
 	/**
 	 * Test method for {@link primitives.Vector#dotProduct(primitives.Vector)}.
 	 */
 	@Test
-	void testDotProduct() {
-		fail("Not yet implemented");
+	void testDotProduct()
+	{
+		  Vector v1;
+		  Vector v2;
+		  Vector v3;
+		try 
+		{
+			// ============ Equivalence Partitions Tests ==============
+			v1 = new Vector(1, 2, 3);
+			v2 = new Vector(-2, -4, -6);
+		    v3 = new Vector(0, 3, -2);
+		    assertTrue("ERROR: dotProduct() for orthogonal vectors is not zero", isZero(v1.dotProduct(v3)));
+		    // =============== Boundary Values Tests ==================
+		    assertTrue("ERROR: dotProduct() wrong value",isZero(v1.dotProduct(v2) + 28));
+		} 
+		catch (Exception e) 
+		{
+			fail("DotProduct() for vectors that not zero vector does not need throw an exception");
+		}
+	      
 	}
 
 }

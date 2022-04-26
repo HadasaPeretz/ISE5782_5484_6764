@@ -80,28 +80,7 @@ public class Vector extends Point
 		double yy=(this.xyz.d2*x.xyz.d2);
 		double zz=(this.xyz.d3*x.xyz.d3);			
 		return xx+yy+zz;
-	    /*if(cos1==0)
-	    {
-	    	
-	    }
-	    else
-	    {
-	    	if(cos1==90)
-	    	{
-	    		
-	    	}
-		    else
-		    {
-		    	if(cos1>90)
-		    	{
-		    		
-		    	}
-		    	if(cos1<90)
-		    	{
-		    		
-		    	}
-		    }
-	    }*/
+	  
 		
 	    
 	}
