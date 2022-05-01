@@ -55,25 +55,24 @@ class PlaneTests {
 	 */
 	@Test
 	void testGetNormalPoint() {
-		try
-		{
-			/***
-			 * EP
-			 */
-			Point p1=new Point(1,1,1);
-			Point p2=new Point(2,4,5);
-			Point p3=new Point(3,3,3);
-			Plane myPlane =new Plane(p1, p2 , p3);
-			Vector temp=new Vector(2,-6,4);
-			double normalLength=temp.length();
-			Vector normal=new Vector(2/normalLength, -6/normalLength, 4/normalLength);
-			assertEquals("Bad normal to plane", normal, myPlane.getNormal());
 		
-		}
-		catch(Exception ex)
-		{
-			fail("for vectors that not zero vector does not need throw an exception");
-		}
+			try
+			{
+				// ============ Equivalence Partitions Tests ==============
+				Point p1=new Point(1,2,3);
+				Point p2=new Point(4,5,6);
+				Point p3=new Point(1,7,5);
+				Plane myPlane =new Plane(p1, p2 , p3);
+				double normalLength=Math.sqrt(38)*3;
+				Vector normal=new Vector(-9/normalLength, -6/normalLength, 15/normalLength);
+				assertEquals("Bad normal to plane", normal, myPlane.getNormal());
+				// =============== Boundary Values Tests ==================
+			
+			}
+			catch(Exception ex)
+			{
+				fail("for vectors that not zero vector does not need throw an exception");
+			}
 	}
 
 	

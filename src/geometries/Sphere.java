@@ -26,7 +26,7 @@ public Point getPoint() {
 
 
 public Sphere(Point point, double radius) {
-		super();
+		//super();
 		this.point = point;
 		this.radius = radius;
 	}
@@ -39,9 +39,9 @@ public String toString() {
 
 
 @Override
-public Vector getNormal(Point p) {
-	Vector v=p.subtract(this.point);	
-	return v.normelaize();
+public Vector getNormal(Point point) throws IllegalArgumentException
+{	
+	return point.subtract(this.point).normelaize();
 }
 /***
  * Returns a cut between Sphere and ray

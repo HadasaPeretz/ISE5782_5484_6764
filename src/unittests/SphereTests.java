@@ -11,11 +11,13 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+
+
 import geometries.Sphere;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
-import primitives.Double3;
+//import primitives.Double3;
 
 /**
  * @author Dell
@@ -28,19 +30,21 @@ class SphereTests {
 	 */
 	@Test
 	void testGetNormal()
-	{	// ============ Equivalence Partitions Tests ==============
-		Point p= new Point(2, 1, 5);
-		Point p1=new Point(1,1,1);
-		Sphere s = new Sphere(p1,5);
-		Vector v= p1.subtract(p).normelaize();
+	{	
+		try
+	{
+		// ============ Equivalence Partitions Tests ==============
+		double radius=5;// äð÷åãä p ùòì äñôøä úäéä 5,2,6
+		Point center=new Point(1, 2, 3);		
+		Sphere mySphere=new Sphere(center, radius);
+		Vector normal=new Vector(4d/5, 0, 3d/5);
+		assertEquals("bad normal to sphere", normal, mySphere.getNormal(new Point(5,2,6)));
 
-		assertEquals("Bad normal to sphere",v,s.getNormal(p));//regular case
-		// =============== Boundary Values Tests ==================
-		// 
-		try {
-			new Sphere(p1,0).getNormal(p);//a case where the radius is 0, the ctor of sphere will throw an exception
-			fail("GetNormal() should throw an exception, but it failed");
-		} catch (Exception e) {}
+	}
+	catch(Exception ex)
+	{
+		fail("for vectors that not zero vector does not need throw an exception");
+	}
 	}
 	
 	
@@ -63,8 +67,8 @@ class SphereTests {
         Point p2 = new Point(1.53484692283495, 0.844948974278318, 0);
         List<Point> result = sphere.findIntsersections(new Ray(new Point(-1, 0, 0), new Vector(3, 1, 0)));
         assertEquals("Wrong number of points", 2, result.size());
-       /* if (result.get(0).getX() > result.get(1).getX())
-            result = List.of(result.get(1), result.get(0));*/////////////////////////////////////////////////check
+       if (result.get(0).getXyz().getD1() > result.get(1).getXyz().getD1())
+            result = List.of(result.get(1), result.get(0));
         assertEquals("Ray crosses sphere", List.of(p1, p2), result);
 
         // TC03: Ray starts inside the sphere (1 point)	        
@@ -90,8 +94,8 @@ class SphereTests {
         // TC13: Ray starts before the sphere (2 points)
         result = sphere.findIntsersections(new Ray(new Point(1, -2, 0),new Vector(0, 1, 0)));
         assertEquals("Wrong number of points", 2, result.size());
-       /* if (result.get(0).getXyz().d1 > result.get(1)p1.getX())
-            result = List.of(result.get(1), result.get(0));*////////////////////////////////////////////////////////////check
+        if (result.get(0).getXyz().getD1() > result.get(1).getXyz().getD1())
+            result = List.of(result.get(1), result.get(0));
        
         assertEquals("Ray crosses sphere", List.of(new Point(1, 1, 0), new Point(1, -1, 0)), result);/////??????????
         

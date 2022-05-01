@@ -62,7 +62,7 @@ class VectorTests {
 	@Test
 	void testCrossProduct()
 	{
-		    Vector v1 = new Vector(1,-4,7);
+		 /*   Vector v1 = new Vector(1,-4,7);
 	        Vector v2 = new Vector(-1, 2, 3);
 
 	        // ============ Equivalence Partitions Tests ==============
@@ -77,7 +77,43 @@ class VectorTests {
 	        try {
 	            v1.crossProduct(v2);//if the vector are on the same direction, the cross product must be 0
 	            fail("crossProduct() for parallel vectors does not throw an exception");
-	        } catch (Exception e) {}
+	        } catch (Exception e) {}*/
+	        
+	        
+	        Vector v1;
+	        Vector v2;
+			try 
+			{
+				v1 = new Vector(1, 2, 3);
+				v2 = new Vector(-2, -4, -6);
+		        // ============ Equivalence Partitions Tests ==============
+		        Vector v3 = new Vector(0, 3, -2);
+		        Vector vr = v1.crossProduct(v3);
+
+		        // Test that length of cross-product is proper (orthogonal vectors taken for simplicity)
+		        assertEquals("crossProduct() wrong result length", v1.length() * v3.length(), vr.length(), 0.00001);
+
+		        // Test cross-product result orthogonality to its operands
+		        assertTrue("crossProduct() result is not orthogonal to 1st operand", isZero(vr.dotProduct(v1)));
+		        assertTrue("crossProduct() result is not orthogonal to 2nd operand", isZero(vr.dotProduct(v3)));
+
+			}
+			catch (Exception e)
+			{
+				fail("CrossProduct() for vectors that not zero vector does not need throw an exception");
+			}
+
+	        // =============== Boundary Values Tests ==================
+	        // test zero vector from cross-productof co-lined vectors
+	        try
+	        {
+	        	v1 = new Vector(1, 2, 3);
+				v2 = new Vector(-2, -4, -6);
+	            v1.crossProduct(v2);
+	            fail("crossProduct() for parallel vectors does not throw an exception");
+	        }
+	        catch (Exception e)
+	        {}
 	}
 
 	/**
@@ -123,6 +159,44 @@ class VectorTests {
 	@Test
 	void testNormelaize() 
 	{
+		/*Vector v;
+		Vector vCopy;
+		Vector vCopyNormalize;
+		// ============ Equivalence Partitions Tests ==============
+		try 
+		{
+			v = new Vector(1, 2, 3);
+			vCopy = new Vector(v.getXyz());//vcopy==v
+			vCopyNormalize = vCopy.normelaize();
+			assertFalse("ERROR: normalize() function creates a new vector", vCopy != vCopyNormalize);
+			assertTrue("ERROR: normalize() result is not a unit vector", isZero(vCopyNormalize.length() - 1));    
+		} 
+		catch (Exception e) 
+		{
+			fail("Normalize() for vectors that not zero vector does not need throw an exception");
+		}
+
+		try 
+		{
+			v = new Vector(3.5,-5,10);
+			v.normelaize();
+			assertEquals("ERROR: normalize() result is not a unit vector", 1, v.length(),1e-10);
+		}
+		catch (Exception e) {}
+		 // =============== Boundary Values Tests ==================
+		try
+		{
+			v = new Vector(0,0,0);
+			v.normelaize();
+			fail("Didn't throw divide by zero exception!");
+		} 
+		catch (ArithmeticException e) 
+		{
+			assertTrue(true);
+		} 
+		catch (Exception e) {}*/
+		
+		
 		Vector v;
 		Vector vCopy;
 		Vector vCopyNormalize;

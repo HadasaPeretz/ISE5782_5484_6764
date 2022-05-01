@@ -34,6 +34,7 @@ public class Traingle extends Polygon implements Geometry
 	@Override
 	 public List<Point> findIntsersections(Ray ray) throws IllegalArgumentException
 	{
+			
 		List<Point>	pInters = plane.findIntsersections(ray);
 
 		//check if the found point is in the triangle's boarders or not...
