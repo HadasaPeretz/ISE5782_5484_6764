@@ -45,17 +45,32 @@ import java.util.Objects;
 	    Point temp=new Point(this.xyz.add(v.xyz)) ;  
 		return temp ;
 	}
+  /***
+   * 
+   * @param p
+   * @return the subtract between tow points return vector
+   */
 	public Vector subtract  (Point p) 
 	{
 		Vector v=new Vector(this.xyz.subtract(p.xyz)) ;
 		return v; 
 	}
+	/***
+	 * 
+	 * @param p
+	 * @return Distance squared between the current and the point obtained
+	 */
 	 public double distanceSquared (Point p)
 	 {
 	   Double3 temp=this.xyz.subtract(p.xyz);
 	   temp = temp.product(temp);
 	   return (temp.d1+temp.d2+temp.d3);
 	 }
+	 /**
+	  *   
+	  * @param p
+	  * @return Distance between the current and the point obtained
+	  */
 	 public double distance (Point p)
 	 { 
 	   double temp1 = Math.sqrt(this.distanceSquared(p));

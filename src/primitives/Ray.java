@@ -23,6 +23,16 @@ public class Ray
 		this.p0 = p0;
 		this.dir = dir.normelaize();
 	}
+	
+	/**
+	 * returns a general point on the ray (according to 't')
+	 */
+	public Point getPoint(double t) {
+		Point retP = this.p0.add(dir.scale(t));
+		return retP;
+	}
+
+	
 	@Override
 	public String toString() 
 	{

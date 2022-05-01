@@ -3,9 +3,14 @@ package geometries;
 
 import static org.junit.Assert.fail;
 
+import java.util.List;
+
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
 import primitives.Double3;
+import static  primitives.Util.isZero;
+import static  primitives.Util.alignZero;
 
 public class Plane implements Geometry 
 {
@@ -55,5 +60,32 @@ public class Plane implements Geometry
 				
 	}
 	
+	/***
+	 * Returns a cut between a plane and a ray
+	 */
+	
+	@Override
+	public List<Point> findIntsersections(Ray ray) throws IllegalArgumentException
+	{
+		double nv = vector.dotProduct(ray.getDir());
+		if(isZero(nv))
+			return null;
+		try {
+			Vector v = ray.getP0().subtract(point);//calculate vector 'Q - P'
+			double t = vector.dotProduct(v) / nv;//calculate 't' according to the given instructions
+			if(t <= 0)
+				return null;
+			Point intersectionP = ray.getPoint(t);//and then the wanted point
+			List<Point> lstP = List.of(intersectionP);
+			if(lstP.isEmpty())
+				return null;
+			return lstP;
+		}                 
+		catch(Exception ex) {
+			return null;
+		}
+	}
+	
+
 
 }

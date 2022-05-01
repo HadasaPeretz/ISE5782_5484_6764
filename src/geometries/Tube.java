@@ -1,5 +1,7 @@
 package geometries;
 
+import java.util.List;
+
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
@@ -35,4 +37,16 @@ public String toString() {
 	return "Tube [radius=" + radius + ", ray=" + ray + "]";
 }
 
+@Override
+public List<Point> findIntsersections(Ray ray) {
+	// TODO Auto-generated method stub
+	return null;
 }
+
+}
+
+
+
+
+
+
