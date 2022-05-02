@@ -11,9 +11,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-
-
+import geometries.Plane;
+import geometries.Geometries;
 import geometries.Sphere;
+import geometries.Traingle;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
@@ -51,6 +52,7 @@ class SphereTests {
 	@Test
     public void testfindIntersections() 
     {
+		
         try
         {
         	Sphere sphere = new Sphere( new Point(1, 0, 0), 1d);
