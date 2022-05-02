@@ -8,7 +8,6 @@ public class Ray
 	 Vector dir;
 
 	
-	
 	public Point getP0() 
 	{
 		return p0;
@@ -51,7 +50,4 @@ public class Ray
 		return Objects.equals(dir, other.dir) && Objects.equals(p0, other.p0);
 	}
 	 
-	
-	
-
 }

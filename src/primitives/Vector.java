@@ -7,7 +7,6 @@ public class Vector extends Point
   public  Vector(Double3 xyz) 
 	{
 		super(xyz);
-		
 		if(xyz.equals(new Double3(0, 0, 0)))
 			throw new IllegalArgumentException("The function dosent support the zero vector");
 		// TODO Auto-generated constructor stub

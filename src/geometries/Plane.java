@@ -1,16 +1,16 @@
 package geometries;
 
 
-import static org.junit.Assert.fail;
+
 
 import java.util.List;
 
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
-import primitives.Double3;
+
 import static  primitives.Util.isZero;
-import static  primitives.Util.alignZero;
+
 
 public class Plane implements Geometry 
 {

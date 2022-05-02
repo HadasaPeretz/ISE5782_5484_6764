@@ -5,7 +5,6 @@ import java.util.List;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
-import static  primitives.Util.isZero;
 import static  primitives.Util.alignZero;;
 
 public class Sphere implements Geometry 
