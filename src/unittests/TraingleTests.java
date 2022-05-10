@@ -46,7 +46,8 @@ class TraingleTests {
 	    {
 	        try
 	        {
-	        	Traingle triangle = new Traingle(new Point(0, 1, 0), new Point(2, 6, 0), new Point(5, 0, 0));
+	        	
+	        Traingle triangle = new Traingle(new Point(0, 1, 0), new Point(2, 6, 0), new Point(5, 0, 0));
 	        
 
 	        // ============ Equivalence Partitions Tests ====================

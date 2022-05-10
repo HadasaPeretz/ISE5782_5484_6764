@@ -206,7 +206,7 @@ class VectorTests {
 			v = new Vector(1, 2, 3);
 			vCopy = new Vector(v.getXyz());//vcopy==v
 			vCopyNormalize = vCopy.normelaize();
-			assertFalse("ERROR: normalize() function creates a new vector", vCopy != vCopyNormalize);
+			//assertFalse("ERROR: normalize() function creates a new vector", vCopy != vCopyNormalize);
 			assertTrue("ERROR: normalize() result is not a unit vector", isZero(vCopyNormalize.length() - 1));    
 		} 
 		catch (Exception e) 
@@ -217,8 +217,8 @@ class VectorTests {
 		try 
 		{
 			v = new Vector(3.5,-5,10);
-			v.normelaize();
-			assertEquals("ERROR: normalize() result is not a unit vector", 1, v.length(),1e-10);
+			Vector v2=v.normelaize();
+			assertEquals("ERROR: normalize() result is not a unit vector",1, v2.length(),1e-10);
 		}
 		catch (Exception e) {}
 		 // =============== Boundary Values Tests ==================

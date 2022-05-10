@@ -1,4 +1,3 @@
-/renderer/
-/primitives/
 /unittests/
-/geometries/
+/primitives/
+/renderer/

@@ -1,6 +1,11 @@
 package renderer;
 
 import static  primitives.Util.isZero;
+
+import java.util.List;
+import java.util.MissingResourceException;
+
+import primitives.Color;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
@@ -15,8 +20,32 @@ public class Camera {
 	private double width;
 	private double height;
 	private double distance;
+	private ImageWriter imageWriter;
+	private RayTracerBase rayTrace;
+	private static final String RESOURCE_ERROR = "Camera resource not set";
+	private static final String RENDER_CLASS = "Camera";
+	private static final String IMAGE_WRITER_COMPONENT = "Image writer";
+	private static final String RAY_TRACER_COMPONENT = "Ray tracer";
 
 	
+
+	public ImageWriter getImageWriter() {
+		return imageWriter;
+	}
+
+	public Camera setImageWriter(ImageWriter imageWriter) {
+		this.imageWriter = imageWriter;
+		return this;
+	}
+
+	public RayTracerBase getRayTrace() {
+		return rayTrace;
+	}
+
+	public Camera setRayTrace(RayTracerBasic rayTrace) {
+		this.rayTrace = rayTrace;
+		return this;
+	}
 
 	/**
 	 * Getter for p0
@@ -189,6 +218,122 @@ public class Camera {
 		return new Ray(p0, Vij);
 
 	}
+	/**
+	 * Cast ray from camera in order to color a pixel
+	 * @param nX resolution on X axis (number of pixels in row)
+	 * @param nY resolution on Y axis (number of pixels in column)
+	 * @param col pixel's column number (pixel index in row)
+	 * @param row pixel's row number (pixel index in column)
+	 */
+	private void castRay(int nX, int nY, int col, int row, int numOfRays) 
 	
+	{
+//		if(numOfRays == 1)
+////		flag = false;
+
+			if(numOfRays == 1 || numOfRays == 0)
+			{
+				Ray ray = camera.constructRayThroughPixel(nX, nY, col, row);
+				Color color = tracer.traceRay(ray);
+				imageWriter.writePixel(col, row, color); 
+			}
+			else
+			{	
+				List<Ray> rays = camera.constructBeamThroughPixel(nX, nY, col, row,numOfRays);
+				Color color = tracer.traceRay(rays);
+				imageWriter.writePixel(col, row, color); 
+			}
+//		Ray ray = camera.constructRayThroughPixel(nX, nY, col, row);
+//		Color color = tracer.traceRay(ray);
+//		imageWriter.writePixel(col, row, color);
+	}
+
+	/**
+	 *help function This function renders image's pixel color map from the scene included with
+	 * the Renderer object - with multi-threading
+	 */
+  private void renderImageThreaded() {
+		final int nX = imageWriter.getNx();
+		final int nY = imageWriter.getNy();
+		final Pixel thePixel = new Pixel(nY, nX);
+		// Generate threads
+		Thread[] threads = new Thread[threadsCount];
+		for (int i = threadsCount - 1; i >= 0; --i) {
+			threads[i] = new Thread(() -> {
+				Pixel pixel = new Pixel();
+				while (thePixel.nextPixel(pixel))
+					castRay(nX, nY, pixel.col, pixel.row, numOfRays);
+			});
+		}
+		// Start threads
+		for (Thread thread : threads)
+			thread.start();
+
+		// Print percents on the console
+		thePixel.print();
+
+		// Ensure all threads have finished
+		for (Thread thread : threads)
+			try {
+				thread.join();
+			} catch (Exception e) {
+			}
+
+		if (print)
+			System.out.print("\r100%");
+	}
+	
+	/**
+	 * This function renders image's pixel color map from the scene included with
+	 * the Renderer object
+	 */
+	public void renderImage() {
+		if (imageWriter == null)
+			throw new MissingResourceException(RESOURCE_ERROR, RENDER_CLASS, IMAGE_WRITER_COMPONENT);
+		//if (camera == null)
+			//throw new MissingResourceException(RESOURCE_ERROR, RENDER_CLASS, CAMERA_COMPONENT);
+		if (rayTrace == null)
+			throw new MissingResourceException(RESOURCE_ERROR, RENDER_CLASS, RAY_TRACER_COMPONENT);
+
+		final int nX = imageWriter.getNx();
+		final int nY = imageWriter.getNy();
+		if (threadsCount == 0)
+			for (int i = 0; i < nY; ++i)
+				for (int j = 0; j < nX; ++j)
+					castRay(nX, nY, j, i, numOfRays);
+		else
+			renderImageThreaded();
+	}
+
+	/**
+	 * Create a grid [over the picture] in the pixel color map. given the grid's
+	 * step and color.
+	 * 
+	 * @param step  grid's step
+	 * @param color grid's color
+	 */
+	public void printGrid(int interval, Color color) {
+		if (imageWriter == null)
+			throw new MissingResourceException (RESOURCE_ERROR, RENDER_CLASS, IMAGE_WRITER_COMPONENT);
+
+		int nX = imageWriter.getNx();
+		int nY = imageWriter.getNy();
+
+		for (int i = 0; i < nY; ++i)
+			for (int j = 0; j < nX; ++j)
+				if (j % interval == 0 || i % interval == 0)
+					imageWriter.writePixel(j, i, color);
+	}
+	
+	/**
+	 * Produce a rendered image file
+	 */
+	public void writeToImage() {
+		if (imageWriter == null)
+			throw new MissingResourceException(RESOURCE_ERROR, RENDER_CLASS, IMAGE_WRITER_COMPONENT);
+
+		imageWriter.writeToImage();
+	}
+
 
 }
