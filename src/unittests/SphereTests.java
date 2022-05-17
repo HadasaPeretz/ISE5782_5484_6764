@@ -11,10 +11,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import geometries.Plane;
-import geometries.Geometries;
+
 import geometries.Sphere;
-import geometries.Traingle;
+
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;

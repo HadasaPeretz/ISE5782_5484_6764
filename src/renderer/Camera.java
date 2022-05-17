@@ -225,86 +225,29 @@ public class Camera {
 	 * @param col pixel's column number (pixel index in row)
 	 * @param row pixel's row number (pixel index in column)
 	 */
-	private void castRay(int nX, int nY, int col, int row, int numOfRays) 
 	
-	{
-//		if(numOfRays == 1)
-////		flag = false;
-
-			if(numOfRays == 1 || numOfRays == 0)
-			{
-				Ray ray = camera.constructRayThroughPixel(nX, nY, col, row);
-				Color color = tracer.traceRay(ray);
-				imageWriter.writePixel(col, row, color); 
-			}
-			else
-			{	
-				List<Ray> rays = camera.constructBeamThroughPixel(nX, nY, col, row,numOfRays);
-				Color color = tracer.traceRay(rays);
-				imageWriter.writePixel(col, row, color); 
-			}
-//		Ray ray = camera.constructRayThroughPixel(nX, nY, col, row);
-//		Color color = tracer.traceRay(ray);
-//		imageWriter.writePixel(col, row, color);
+	private void castRay(int nX, int nY, int col, int row) {
+		Ray ray = constructRayThroughPixel(nX, nY, col, row);
+		Color color = rayTrace.traceRay(ray);
+		imageWriter.writePixel(col, row, color);
 	}
-
-	/**
-	 *help function This function renders image's pixel color map from the scene included with
-	 * the Renderer object - with multi-threading
-	 */
-  private void renderImageThreaded() {
-		final int nX = imageWriter.getNx();
-		final int nY = imageWriter.getNy();
-		final Pixel thePixel = new Pixel(nY, nX);
-		// Generate threads
-		Thread[] threads = new Thread[threadsCount];
-		for (int i = threadsCount - 1; i >= 0; --i) {
-			threads[i] = new Thread(() -> {
-				Pixel pixel = new Pixel();
-				while (thePixel.nextPixel(pixel))
-					castRay(nX, nY, pixel.col, pixel.row, numOfRays);
-			});
-		}
-		// Start threads
-		for (Thread thread : threads)
-			thread.start();
-
-		// Print percents on the console
-		thePixel.print();
-
-		// Ensure all threads have finished
-		for (Thread thread : threads)
-			try {
-				thread.join();
-			} catch (Exception e) {
-			}
-
-		if (print)
-			System.out.print("\r100%");
-	}
+	
 	
 	/**
 	 * This function renders image's pixel color map from the scene included with
 	 * the Renderer object
 	 */
-	public void renderImage() {
-		if (imageWriter == null)
-			throw new MissingResourceException(RESOURCE_ERROR, RENDER_CLASS, IMAGE_WRITER_COMPONENT);
-		//if (camera == null)
-			//throw new MissingResourceException(RESOURCE_ERROR, RENDER_CLASS, CAMERA_COMPONENT);
-		if (rayTrace == null)
-			throw new MissingResourceException(RESOURCE_ERROR, RENDER_CLASS, RAY_TRACER_COMPONENT);
-
-		final int nX = imageWriter.getNx();
-		final int nY = imageWriter.getNy();
-		if (threadsCount == 0)
-			for (int i = 0; i < nY; ++i)
-				for (int j = 0; j < nX; ++j)
-					castRay(nX, nY, j, i, numOfRays);
-		else
-			renderImageThreaded();
+	public void renderImage()
+	{
+		if(this.p0==null || this.vTo==null|| this.vUp==null || this.rayTrace==null || this.vRight==null||this.imageWriter==null)
+			throw new MissingResourceException("one of the properties contains empty value", null, null);
+		//throw new UnsupportedOperationException();
+		for (int i = 0; i <imageWriter.getNy() ; i++) {
+			for (int j = 0; j < imageWriter.getNx(); j++) {
+				castRay(imageWriter.getNx(),imageWriter.getNy(),j,i);
+			}
+		}
 	}
-
 	/**
 	 * Create a grid [over the picture] in the pixel color map. given the grid's
 	 * step and color.
