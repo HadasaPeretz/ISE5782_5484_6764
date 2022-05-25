@@ -2,11 +2,12 @@ package geometries;
 
 import java.util.List;
 
+//import geometries.Intersectable.GeoPoint;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
-public class Tube implements Geometry 
+public class Tube extends Geometry 
 {
 	public double radius;
 	public Ray ray;
@@ -37,11 +38,19 @@ public String toString() {
 	return "Tube [radius=" + radius + ", ray=" + ray + "]";
 }
 
-@Override
+/*@Override
 public List<Point> findIntsersections(Ray ray) {
 	// TODO Auto-generated method stub
 	return null;
-}
+}*/
+@Override
+	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray)
+	{
+  	return null;
+
+	}
+
+
 
 }
 

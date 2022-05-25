@@ -5,10 +5,11 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import geometries.Intersectable.GeoPoint;
 import primitives.Point;
 import primitives.Ray;
 
-public class Geometries implements Intersectable {
+public class Geometries extends Intersectable {
 	
 	private List<Intersectable> sceneGeometries;
 	
@@ -36,11 +37,13 @@ public class Geometries implements Intersectable {
 			sceneGeometries.addAll(Arrays.asList(geometries));
 	}
 	
+   /* @Override
 	public List<Point> findIntsersections(Ray ray)
 	{
-		return null;
+    	return null;
+ 
 	}
-	
+	*/
 	
 	
 	/*@Override
@@ -48,5 +51,19 @@ public class Geometries implements Intersectable {
 		// TODO Auto-generated method stub
 		return null;
 	}*/
-
+	@Override
+	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray)
+	{
+	List<GeoPoint> temp = new ArrayList<GeoPoint>();	
+	for (Intersectable intersectable : sceneGeometries) 
+	{
+		List<GeoPoint> intersection = intersectable.findGeoIntersections(ray);
+		if (intersection != null)
+			temp.addAll(intersection); 
+	}
+	
+	if (temp.isEmpty())
+		return null;
+	return temp;	
+   }
 }

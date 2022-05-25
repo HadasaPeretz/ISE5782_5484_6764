@@ -2,14 +2,18 @@ package geometries;
 
 import java.util.List;
 
+//import java.util.List;
+
+//import geometries.Intersectable.GeoPoint;
 import primitives.Point;
 import primitives.Ray;
+//import primitives.Ray;
 import primitives.Vector;
 import static  primitives.Util.isZero;
-import static  primitives.Util.alignZero;;
+//import static  primitives.Util.alignZero;;
 
 
-public class Traingle extends Polygon implements Geometry
+public class Traingle extends Polygon //implements Geometry 
 {
 	
 	public Traingle(Point... vertices)
@@ -31,7 +35,7 @@ public class Traingle extends Polygon implements Geometry
 	/***
 	 * Returns a cut between a triangle and a ray
 	 */
-	@Override
+/*	@Override
 	 public List<Point> findIntsersections(Ray ray) throws IllegalArgumentException
 	{
 			
@@ -59,7 +63,50 @@ public class Traingle extends Polygon implements Geometry
 				return null; //there are no intersections
 			return null;		
 	}
+*/
+	@Override
+	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+		//get Intersections of plane
+		List<GeoPoint> planeIntersections = plane.findGeoIntersections(ray);
 
-		
+		if (planeIntersections == null)
+			return null;
+
+		Point p0 = ray.getP0();
+		Vector rayDir = ray.getDir();
+
+		//all the vectors ( (v1-p0)x(v2-p0) ) * (ray dir)  should be the same signe
+		// else the ray outside the polygon
+
+		//first check the sign of dot product the last and the first
+		Vector v1 = vertices.get(0).subtract(p0);
+		Vector vn = vertices.get(vertices.size() - 1).subtract(p0);
+
+		double s1 = rayDir.dotProduct(vn.crossProduct(v1));
+
+		//if the ray cross in the edge of the polygon
+		if (isZero(s1))
+			return null;
+
+		double s2; //keep the next product
+		Vector v2; //the next vector
+		for (var vertex : vertices.subList(1, vertices.size())) {
+
+			v2 = vertex.subtract(p0);
+			s2 = rayDir.dotProduct(v1.crossProduct(v2));
+
+			//if the ray cross in the edge of the polygon
+			if (isZero(s2)) return null;
+
+			//if they not the same sign
+			if( s1 * s2 < 0  )
+				return null;
+
+			v1 = v2; //for the next round
+		}
+
+		//if the func not return null than we have Intersections with the polygon
+		return planeIntersections.stream().map(gp->new GeoPoint(this,gp.point)).toList();
+	}
 		
 }

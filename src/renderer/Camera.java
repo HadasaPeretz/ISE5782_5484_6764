@@ -25,7 +25,7 @@ public class Camera {
 	private static final String RESOURCE_ERROR = "Camera resource not set";
 	private static final String RENDER_CLASS = "Camera";
 	private static final String IMAGE_WRITER_COMPONENT = "Image writer";
-	private static final String RAY_TRACER_COMPONENT = "Ray tracer";
+//	private static final String RAY_TRACER_COMPONENT = "Ray tracer";
 
 	
 
