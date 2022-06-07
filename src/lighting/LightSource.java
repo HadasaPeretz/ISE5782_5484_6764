@@ -1,6 +1,7 @@
 package lighting;
 
 import primitives.Color;
+import primitives.Double3;
 import primitives.Point;
 import primitives.Vector;
 /**
@@ -26,6 +27,7 @@ public interface LightSource
 	 * @return the lighting direction on a point
 	 */
 	public Vector getL(Point p);
-
+	
+	double getDistance(Point point);
 
 }

@@ -71,7 +71,7 @@ public List<Point> findIntsersections (Ray ray) throws IllegalArgumentException
 	}
 	*/
 @Override
-protected  List<GeoPoint> findGeoIntersectionsHelper(Ray ray)
+protected  List<GeoPoint> findGeoIntersectionsHelper(Ray ray,double maxDistance)
 {
 	if (ray.getP0().equals(point)) // if the begin of the ray in the center, the point, is on the radius
 		return List.of(new GeoPoint(this,ray.getPoint(radius)));

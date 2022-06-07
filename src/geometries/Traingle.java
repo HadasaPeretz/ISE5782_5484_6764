@@ -1,14 +1,20 @@
 package geometries;
 
+import java.util.LinkedList;
 import java.util.List;
+
+import geometries.Intersectable.GeoPoint;
 
 //import java.util.List;
 
 //import geometries.Intersectable.GeoPoint;
 import primitives.Point;
 import primitives.Ray;
+import primitives.Util;
 //import primitives.Ray;
 import primitives.Vector;
+
+import static primitives.Util.alignZero;
 import static  primitives.Util.isZero;
 //import static  primitives.Util.alignZero;;
 
@@ -65,9 +71,11 @@ public class Traingle extends Polygon //implements Geometry
 	}
 */
 	@Override
-	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray,double maxdistance) {
 		//get Intersections of plane
 		List<GeoPoint> planeIntersections = plane.findGeoIntersections(ray);
+		//double nv = vector.dotProduct(ray.getDir());
+		
 
 		if (planeIntersections == null)
 			return null;
@@ -104,6 +112,13 @@ public class Traingle extends Polygon //implements Geometry
 
 			v1 = v2; //for the next round
 		}
+	/*	double nv =  plane.vector.dotProduct(ray.getDir());
+		Vector pSubtractP0 = plane.point.subtract(ray.getP0());
+		double t = alignZero((plane.vector.dotProduct(pSubtractP0))/nv);
+		 List<GeoPoint>  finish=new LinkedList<GeoPoint>();
+		 for(GeoPoint xxx:planeIntersections)
+			 if(Util.alignZero(t-maxdistance)<=0)
+				 finish.add(xxx);*/
 
 		//if the func not return null than we have Intersections with the polygon
 		return planeIntersections.stream().map(gp->new GeoPoint(this,gp.point)).toList();

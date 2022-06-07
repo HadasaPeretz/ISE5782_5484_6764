@@ -3,10 +3,12 @@ package geometries;
 
 
 
+import java.util.LinkedList;
 import java.util.List;
 //import geometries.Intersectable.GeoPoint;
 import primitives.Point;
 import primitives.Ray;
+import primitives.Util;
 import primitives.Vector;
 
 import static  primitives.Util.isZero;
@@ -89,8 +91,8 @@ public class Plane extends Geometry
 	 */
 	
 @Override
-  protected  List<GeoPoint> findGeoIntersectionsHelper(Ray ray)
-  {
+  protected  List<GeoPoint> findGeoIntersectionsHelper(Ray ray,double maxDistance)
+  {/*
 	double nv = vector.dotProduct(ray.getDir());
 	if (isZero(nv))
 	{
@@ -106,11 +108,43 @@ public class Plane extends Geometry
 		{
 			return null;
 		}
-	 return List.of(new GeoPoint(this,ray.getPoint(t)));
+	 List<GeoPoint> temp1=List.of(new GeoPoint(this,ray.getPoint(t)));
+	 List<GeoPoint>  finish=new LinkedList<GeoPoint>();
+	 for(GeoPoint xxx:temp1)
+		 if(Util.alignZero(t-maxDistance)<=0)
+			 finish.add(xxx);
+	 return finish;
+	}
+	catch(Exception ex) 
+	{
+		return null;
+	}*/
+	
+	
+	double nv = vector.dotProduct(ray.getDir());
+	if (isZero(nv))
+	{
+		return null;
+	}
+	
+	try 
+	{
+		Vector pSubtractP0 = point.subtract(ray.getP0());
+		double t = alignZero((vector.dotProduct(pSubtractP0))/nv);
+
+		if(t <= 0)
+		{
+			return null;
+		}
+		return List.of(new GeoPoint(this,ray.getPoint(t)));
 	}
 	catch(Exception ex) 
 	{
 		return null;
 	}
+	
+	
+	
+	
   }
 }

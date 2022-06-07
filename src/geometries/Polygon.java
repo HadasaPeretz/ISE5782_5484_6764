@@ -1,8 +1,10 @@
 package geometries;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
+import geometries.Intersectable.GeoPoint;
 import primitives.*;
 import static primitives.Util.*;
 
@@ -93,7 +95,7 @@ public class Polygon extends Geometry {
 
 	
 	@Override
-	protected  List<GeoPoint> findGeoIntersectionsHelper(Ray ray)
+	protected  List<GeoPoint> findGeoIntersectionsHelper(Ray ray,double maxDistance)
 	{
 	 List<GeoPoint> rayPoints = plane.findGeoIntersections(ray);
 		if (rayPoints == null)
@@ -126,6 +128,7 @@ public class Polygon extends Geometry {
 		{
 			if (alignZero((ray.getDir()).dotProduct(vector)) > 0)
 			{
+			    
 				countPositive++;
 			}
 			else if (alignZero((ray.getDir()).dotProduct(vector)) <= 0)
@@ -138,7 +141,14 @@ public class Polygon extends Geometry {
 		{
 			return null; //there is no instruction point
 		}
+	/*	double nv =  plane.vector.dotProduct(ray.getDir());
+		Vector pSubtractP0 = plane.point.subtract(ray.getP0());
+		double t = alignZero((plane.vector.dotProduct(pSubtractP0))/nv);
+		 List<GeoPoint>  finish=new LinkedList<GeoPoint>();
+		 for(GeoPoint xxx:rayPoints)
+			 if(Util.alignZero(t-maxDistance)<=0)
+				 finish.add(xxx);*/
+		 return rayPoints;
 
-		return rayPoints;
 	}
 }

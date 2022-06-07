@@ -3,11 +3,14 @@ package geometries;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import geometries.Intersectable.GeoPoint;
 import primitives.Point;
 import primitives.Ray;
+import primitives.Util;
+import static  primitives.Util.alignZero;
 
 public class Geometries extends Intersectable {
 	
@@ -51,19 +54,24 @@ public class Geometries extends Intersectable {
 		// TODO Auto-generated method stub
 		return null;
 	}*/
+	
+	
+	
 	@Override
-	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray)
+	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray,double maxDistance)
 	{
-	List<GeoPoint> temp = new ArrayList<GeoPoint>();	
-	for (Intersectable intersectable : sceneGeometries) 
-	{
-		List<GeoPoint> intersection = intersectable.findGeoIntersections(ray);
-		if (intersection != null)
-			temp.addAll(intersection); 
+		List<GeoPoint> points = null;
+		if (sceneGeometries != null) {
+		for (var body : sceneGeometries) {
+		var result = body.findGeoIntersections(ray, maxDistance);
+		if (result != null)
+		if (points == null)
+		points = new LinkedList<GeoPoint>(result);
+		else
+		points.addAll(result);
+		}
+		}
+		return points;
 	}
 	
-	if (temp.isEmpty())
-		return null;
-	return temp;	
-   }
 }
