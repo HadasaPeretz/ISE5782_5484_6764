@@ -7,7 +7,10 @@ public class Ray
 {
 	 Point p0;
 	 Vector dir;
-
+	 /**
+	  * A constant that expresses the size of the first rays
+	  */
+	private static final double DELTA = 0.1;
 	
 	public Point getP0() 
 	{
@@ -24,6 +27,26 @@ public class Ray
 		this.p0 = p0;
 		this.dir = dir.normelaize();
 	}
+	
+	/***
+	 * A builder that receives a dot and two vectors and moves the beam head on the normal geometry line in the direction of the new beam
+	 * @param head
+	 * @param lightDirection
+	 * @param n
+	 */
+	
+	public Ray(Point head, Vector lightDirection, Vector n) 
+	{
+		if(Util.alignZero(lightDirection.dotProduct(n)) < 0)
+			 p0= head.add(n.scale(-DELTA));
+		else if(Util.alignZero(lightDirection.dotProduct(n)) > 0)
+			 p0= head.add(n.scale(DELTA));
+		else if(Util.isZero(lightDirection.dotProduct(n)))
+			 p0=head;
+		dir=lightDirection;
+		dir.normelaize();		
+	}
+
 	
 	/**
 	 * returns a general point on the ray (according to 't')

@@ -27,6 +27,8 @@ public class Color {
 		rgb = Double3.ZERO;
 	}
 
+	
+
 	/**
 	 * Constructor to generate a color according to RGB components Each component in
 	 * range 0..255 (for printed white color) or more [for lights]
