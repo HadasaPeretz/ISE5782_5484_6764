@@ -6,11 +6,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import geometries.Intersectable.GeoPoint;
-import primitives.Point;
+
 import primitives.Ray;
-import primitives.Util;
-import static  primitives.Util.alignZero;
+
 
 public class Geometries extends Intersectable {
 	

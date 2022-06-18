@@ -1,20 +1,20 @@
 package geometries;
 
-import java.util.LinkedList;
+//import java.util.LinkedList;
 import java.util.List;
 
-import geometries.Intersectable.GeoPoint;
+//import geometries.Intersectable.GeoPoint;
 
 //import java.util.List;
 
 //import geometries.Intersectable.GeoPoint;
 import primitives.Point;
 import primitives.Ray;
-import primitives.Util;
+//import primitives.Util;
 //import primitives.Ray;
 import primitives.Vector;
 
-import static primitives.Util.alignZero;
+//import static primitives.Util.alignZero;
 import static  primitives.Util.isZero;
 //import static  primitives.Util.alignZero;;
 

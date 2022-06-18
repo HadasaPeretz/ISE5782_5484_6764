@@ -1,5 +1,5 @@
-/lighting/
-/renderer/
-/geometries/
 /unittests/
 /primitives/
+/renderer/
+/geometries/
+/lighting/

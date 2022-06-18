@@ -2,7 +2,7 @@ package renderer;
 
 import static  primitives.Util.isZero;
 
-import java.util.List;
+
 import java.util.MissingResourceException;
 
 import primitives.Color;

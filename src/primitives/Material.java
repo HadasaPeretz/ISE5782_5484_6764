@@ -1,5 +1,5 @@
 package primitives;
-import primitives.Double3;
+
 
 public class Material
 {
@@ -13,15 +13,17 @@ public class Material
 
 	
 
-	public void setKt(Double3 kt) 
+	public Material setKt(Double3 kt) 
 	{
 		Kt = kt;
+		return this;
 	}
 
 	
-	public void setKr(Double3 kr) 
+	public Material setKr(Double3 kr) 
 	{
 		Kr = kr;
+		return this;
 	}
 
 	/**

@@ -3,12 +3,12 @@ package geometries;
 
 
 
-import java.util.LinkedList;
+//import java.util.LinkedList;
 import java.util.List;
 //import geometries.Intersectable.GeoPoint;
 import primitives.Point;
 import primitives.Ray;
-import primitives.Util;
+//import primitives.Util;
 import primitives.Vector;
 
 import static  primitives.Util.isZero;

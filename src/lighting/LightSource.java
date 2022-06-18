@@ -1,7 +1,7 @@
 package lighting;
 
 import primitives.Color;
-import primitives.Double3;
+//import primitives.Double3;
 import primitives.Point;
 import primitives.Vector;
 /**

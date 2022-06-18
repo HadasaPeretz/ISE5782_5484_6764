@@ -1,10 +1,10 @@
 package geometries;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+//import java.util.LinkedList;
 import java.util.List;
 
-import geometries.Intersectable.GeoPoint;
+//import geometries.Intersectable.GeoPoint;
 import primitives.*;
 import static primitives.Util.*;
 
